@@ -231,7 +231,7 @@ cd ~
 
 Si vous souhaitez sauvegarder un état de votre machine virtuelle (par exemple, dans le cas des ordinateurs de l'université qui sont réinitialisés à chaque déconnexion), vous pouvez exporter la machine virtuelle vers un fichier au moyen d'une commande. Vous pourrez alors stocker ce fichier à un endroit sécurisé et demander à wsl de le charger lors d'une utilisation ultérieure.
 
-Une fois votre machine virtuelle éteinte, exécutez la commande suivante dans une invite de commande Windows, en remplaçant `Ubuntu` par le nom de votre machine virtuelle à sauvegarder : 
+Une fois votre machine virtuelle éteinte, exécutez la commande suivante dans une invite de commande Windows, en remplaçant `Ubuntu` par le nom de votre machine virtuelle à sauvegarder, et `ubuntu-dev` par le nom du fichier dans lequel vous voulez sauvegarder la machine virtuelle : 
 
 ```bash
 wsl --export Ubuntu ubuntu-dev.tar
