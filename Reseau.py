@@ -34,19 +34,53 @@ class Reseau:
         self.strat = strat
 
     def valider_reseau(self) -> bool:
-        # TODO
-        return False
+        if self.noeud_entree == -1:
+             return False
+        if self.noeud_entree not in self.noeuds:
+             return False
+
+        visites = set()
+        pile = [self.noeud_entree]
+
+        while pile:
+          n = pile.pop()
+          if n not in visites:
+            visites.add(n)
+            for a, b in self.arcs:
+                if a == n and b not in visites:
+                    pile.append(b)
+                elif b == n and a not in visites:
+                    pile.append(a)
+
+     return visites == set(self.noeuds.keys())
+        
 
     def valider_distribution(self, t: Terrain) -> bool:
-        # TODO
-        return False
+        if not self.valider_reseau():
+           return False
+
+        positions_noeuds = set(self.noeuds.values())
+
+        for i, ligne in enumerate(t.cases):
+            for j, case in enumerate(ligne):
+               if case == Case.CLIENT:
+                  if (i, j) not in positions_noeuds:
+                      return False
+
+     return True
 
     def configurer(self, t: Terrain):
         self.noeud_entree, self.noeuds, self.arcs  = self.strat.configurer(t)
 
     def afficher(self) -> None:
-        # TODO
-        pass
+        print("Noeud d'entrée :", self.noeud_entree)
+        print("Noeuds :")
+        for k, v in self.noeuds.items():
+          print(f"  {k} -> {v}")
+        print("Arcs :")
+        for a in self.arcs:
+          print(f"  {a[0]} <-> {a[1]}")
+        
 
     def afficher_avec_terrain(self, t: Terrain) -> None:
         for ligne, l in enumerate(t.cases):
